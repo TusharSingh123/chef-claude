@@ -4,7 +4,7 @@ export default function IngrediensList(props) {
   ));
   return (
     <section>
-      <h1>Ingredients on hand:</h1>
+      <h2>Ingredients on hand:</h2>
       <ul className="ingredients-list">{ingredientsElementsList}</ul>
     </section>
   );

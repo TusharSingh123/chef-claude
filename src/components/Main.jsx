@@ -8,6 +8,13 @@ import { getRecipeFromGemini } from "../dataFromAi/generateRecipeFromAi";
 export default function Main() {
   const [ingredients, setIngredients] = React.useState([]);
   const [generatedRecipe, setGeneratedRecipe] = React.useState(undefined);
+  const recipeSection = React.useRef(null)
+  
+  React.useEffect(() => {
+        if (generatedRecipe !== "" && recipeSection.current !== null) {
+            recipeSection.current.scrollIntoView({behavior: "smooth"})
+        }
+    }, [generatedRecipe])
 
   function addIngredients(formData) {
     const ingredient = formData.get("ingredient");
@@ -22,7 +29,7 @@ export default function Main() {
     <main>
       <Form action={addIngredients} />
       {ingredients.length > 0 && <IngrediensList ingredients={ingredients} />}
-      {ingredients.length > 3 && <GetRecipeContainer getRecipe={getRecipe} />}
+      {ingredients.length > 3 && <GetRecipeContainer getRecipe={getRecipe} ref={recipeSection} />}
       {generatedRecipe && <GeneratedRecipe generatedRecipe={generatedRecipe} />}
     </main>
   );
